@@ -210,3 +210,8 @@ more detailed explanation.
 When multiple streamers are available for a given format, a specific streamer
 can be selected, either for a single format or on a global basis. This is
 done via `preferstreamer` (not exported by default).
+
+## See also
+
+* [Formats](https://github.com/ofisette/Formats.jl):
+  Read, write and detect formatted data, based on MIME types (dependency).
