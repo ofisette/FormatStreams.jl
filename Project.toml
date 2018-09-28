@@ -1,0 +1,7 @@
+name = "FormatStreams"
+uuid = "6bb377a4-aa12-11e8-0b8b-dd9755c73f41"
+authors = ["Olivier Fisette <ofisette@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Formats = "eb180938-a0cb-11e8-14d8-335c76514f04"
