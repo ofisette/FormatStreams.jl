@@ -2,7 +2,7 @@ module FormatStreams
 
 using Formats
 using Formats:
-		FormatHandler, FormattedIO, FormattedFilename,
+		FormatHandler, Formatted, FormattedIO, FormattedFilename,
 		resolveformat, resolvecoding
 
 export FormattedStream, streamf, eachval, eachval!

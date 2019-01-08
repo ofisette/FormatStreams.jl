@@ -27,21 +27,30 @@ julia> s = streamf(specify("lysozyme.dat", "trajectory/x-trr"))
 [...]
 ```
 """
-function streamf(f::FormattedIO, args...; kwargs...)
+function streamf(f::Formatted, args...; kwargs...)
 	format = resolveformat(f)
-	streamer = resolvestreamer(format)
 	coding = resolvecoding(f)
-	if coding == nothing
-		io = f.resource
-	else
-		decoder = resolvedecoder(coding)
-		io = TranscodingStream(decoder(), f.resource)
-	end
-	streamf(streamer, format, io, args...; kwargs...)
+	streamf(f.resource, format, coding, args...; kwargs...)
 end
 
-streamf(f::FormattedFilename, args...; kwargs...) =
-		streamf(open(f), args...; kwargs...)
+function streamf(filename::AbstractString, format::MIME,
+		coding::Union{MIME,Nothing}, args...; kwargs...)
+	open(filename) do io
+		streamf(io, format, coding, args...; kwargs...)
+	end
+end
+
+function streamf(io::IO, format::MIME, coding::Union{MIME,Nothing}, args...;
+		kwargs...)
+	streamer = resolvestreamer(format)
+	if coding == nothing
+		streamf(streamer, format, io, args...; kwargs...)
+	else
+		decoder = resolvedecoder(coding)
+		io2 = TranscodingStream(decoder(), io)
+		streamf(streamer, format, io2, args...; kwargs...)
+	end
+end
 
 streamf(filename::AbstractString, args...; kwargs...) =
 		streamf(guess(filename), args...; kwargs...)
