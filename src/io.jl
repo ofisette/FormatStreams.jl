@@ -33,12 +33,9 @@ function streamf(f::Formatted, args...; kwargs...)
 	streamf(f.resource, format, coding, args...; kwargs...)
 end
 
-function streamf(filename::AbstractString, format::MIME,
-		coding::Union{MIME,Nothing}, args...; kwargs...)
-	open(filename) do io
-		streamf(io, format, coding, args...; kwargs...)
-	end
-end
+streamf(filename::AbstractString, format::MIME, coding::Union{MIME,Nothing},
+		args...; kwargs...) =
+		streamf(open(filename), format, coding, args...; kwargs...)
 
 function streamf(io::IO, format::MIME, coding::Union{MIME,Nothing}, args...;
 		kwargs...)
@@ -52,10 +49,8 @@ function streamf(io::IO, format::MIME, coding::Union{MIME,Nothing}, args...;
 	end
 end
 
-streamf(filename::AbstractString, args...; kwargs...) =
-		streamf(guess(filename), args...; kwargs...)
-
-streamf(io::IO, args...; kwargs...) = streamf(guess(io), args...; kwargs...)
+streamf(resource::Union{AbstractString,IO}, args...; kwargs...) =
+		streamf(guess(resource), args...; kwargs...)
 
 function streamf(f::Function,
 		resource::Union{AbstractString,IO,Formats.FormattedFilename}, args...;
