@@ -2,13 +2,13 @@ module FormatStreams
 
 using Formats
 using Formats:
-        FormatHandler, FormattedIO, FormattedFilename,
-        resolveformat, resolvecoding
+		FormatHandler, FormattedIO, FormattedFilename,
+		resolveformat, resolvecoding
 
 export FormattedStream, streamf, eachval, eachval!
 
 """
-    FormattedStream{T}
+	FormattedStream{T}
 
 Base type for formatted streams.
 
@@ -64,8 +64,8 @@ The `read` function is typically supported, allowing sequential reading:
 ```julia
 s = streamf("trajectory.xtc")
 while !eof(s)
-    frame = read(s)
-    [...]
+	frame = read(s)
+	[...]
 end
 close(s)
 ```
@@ -76,8 +76,8 @@ Function `read!` may be supported to read into a pre-allocated output buffer:
 s = streamf("trajectory.xtc")
 frame = MolecularModel()
 while !eof(s)
-    read!(s, frame)
-    [...]
+	read!(s, frame)
+	[...]
 end
 close(s)
 ```
@@ -103,8 +103,8 @@ s1 = streamf("input.xtc")
 s2 = streamf(openf("output.trr", "w"))
 frame = MolecularModel()
 while !eof(s1)
-    read!(s1, frame)
-    write(s2, frame)
+	read!(s1, frame)
+	write(s2, frame)
 end
 close(s1)
 close(s2)
@@ -121,11 +121,11 @@ formatted stream upon completion:
 
 ```julia
 streamf("trajectory.xtc") do s
-    frame = MolecularModel()
-    while !eof(s)
-        read!(s, frame)
-        [...]
-    end
+	frame = MolecularModel()
+	while !eof(s)
+		read!(s, frame)
+		[...]
+	end
 end
 ```
 
@@ -135,7 +135,7 @@ streamf:
 ```julia
 s = streamf("trajectory.xtc")
 for frame in eachval(s)
-    [...]
+	[...]
 end
 ```
 
@@ -145,9 +145,9 @@ way to iterate over formatted objects:
 
 ```julia
 streamf("trajectory.xtc") do s
-    for frame in eachval!(s, MolecularModel())
-        [...]
-    end
+	for frame in eachval!(s, MolecularModel())
+		[...]
+	end
 end
 ```
 

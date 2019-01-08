@@ -5,9 +5,9 @@ struct StreamerRegistry
 end
 
 StreamerRegistry() = StreamerRegistry(
-        Dict{MIME,Vector{FormatHandler}}(),
-        Dict{MIME,FormatHandler}(),
-        Vector{FormatHandler}())
+		Dict{MIME,Vector{FormatHandler}}(),
+		Dict{MIME,FormatHandler}(),
+		Vector{FormatHandler}())
 
 Base.copy(registry::StreamerRegistry) = StreamerRegistry(
 		copy(registry.streamers),
