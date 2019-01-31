@@ -48,7 +48,7 @@ using FormatCodecs   # Codecs for common codings (separate package)
 using FormatStreams  # Streams of formatted data (this package)
 ```
 
-To open a file as a stream of formatted objects, automatically guessing its
+To open a file as a stream of formatted objects, automatically inferring its
 format/coding if unspecified:
 
 ```julia
@@ -175,7 +175,7 @@ end
 
 `FormatStreams` provides `streamf` as the single way to open a stream of
 formatted objects. `streamf` operates on filenames, IO streams and `Formatted`
-objects (usually created with the `guess` and `specify` functions from the
+objects (usually created with the `infer` and `specify` functions from the
 `Formats` package).
 
 Objects returned by `streamf` specialize the `FormattedStream` abstract type.

@@ -28,7 +28,7 @@ using FormatCodecs   # Codecs for common codings (separate package)
 using FormatStreams  # Streams of formatted data (this package)
 ```
 
-To open a file as a stream of formatted objects, automatically guessing its
+To open a file as a stream of formatted objects, automatically inferring its
 format/coding if unspecified:
 
 ```julia

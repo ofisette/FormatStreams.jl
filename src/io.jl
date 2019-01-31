@@ -2,7 +2,7 @@
 	streamf(filename|io|formatted) -> ::FormattedStream
 	streamf(f::Function, filename|io|formatted) -> f(s)
 
-Wrap a resource as a stream of formatted objects, guessing format/coding
+Wrap a resource as a stream of formatted objects, inferring format/coding
 automatically if unspecified.
 
 The second signature calls `f` with the opened stream as argument, then closes
@@ -50,7 +50,7 @@ function streamf(io::IO, format::MIME, coding::Union{MIME,Nothing}, args...;
 end
 
 streamf(resource::Union{AbstractString,IO}, args...; kwargs...) =
-		streamf(guess(resource), args...; kwargs...)
+		streamf(infer(resource), args...; kwargs...)
 
 function streamf(f::Function,
 		resource::Union{AbstractString,IO,Formats.FormattedFilename}, args...;
